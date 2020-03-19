@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% bootstrap_messages %}
+    <link href="https://v3.bootcss.com/examples/signin/signin.css" rel="stylesheet">
+    <title>Blog</title>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+<div class="navbar-header">
+<a href="{% url 'blog:private' msg.receiver.pk %}">Home</a>
+<a href="{% url 'blog:logout' %}">logout</a>
+</div>
+</nav>
+<div class="panel panel-default">
+    <div class="panel-heading">
+    <label>Time:{{ msg.date }}</label>
+    <label>From:{{ msg.sender_id }}</label>
+    </div>
+    <div class="panel-body">
+        {{ msg.msg|linebreaks }}
+    </div>
+</div>
+</body>
+</html>

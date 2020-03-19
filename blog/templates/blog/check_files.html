@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% bootstrap_messages %}
+    <link href="https://v3.bootcss.com/examples/signin/signin.css" rel="stylesheet">
+    <title>Blog</title>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+<div class="navbar-header">
+<a href="{% url 'blog:index' %}">Index</a>   <a href="{% url 'blog:logout' %}">logout</a>
+<a href="{% url 'blog:private' user.id %}">Home</a>
+</div>
+</nav>
+<div class="container">
+{% if all_file %}
+{% for i in all_file %}
+<p><a href="{% url 'blog:check_file' i.pk %}">{{ i.name }}</a></p>
+{% endfor %}
+{% else %}
+<p>You have no file</p>
+{% endif %}
+</div>
+</body>
+</html>

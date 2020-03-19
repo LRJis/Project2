@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% bootstrap_messages %}
+    <link href="https://v3.bootcss.com/examples/signin/signin.css" rel="stylesheet">
+    <title>Blog</title>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+<div class="navbar-header">
+<a href="{% url 'blog:index' %}">Index</a>   <a href="{% url 'blog:logout' %}">logout</a>
+</div>
+</nav>
+<div class="container">
+<h1>{{ user.name }}</h1>
+</div>
+<div class="container">
+{% if all_article %}
+{% for i in all_article %}
+    <div class="panel panel-default">
+    <div class="panel-heading">
+        <label>  Time:  {{ i.pub_date }}</label><a href="{% url 'blog:edit_article' i.pk %}">Edit it</a>
+    </div>
+    <div class="panel-body">
+         {{ i.text|linebreaks }}
+    </div>
+    </div>
+{% endfor %}
+{% else %}
+<p>You have no article!</p>
+{% endif %}
+</div>
+<div class="container">
+<p><a href="{% url 'blog:add_private' user.id %}">Add your article</a></p>
+<p><a href="{% url 'blog:send_message' user.id %}">Send your message</a></p>
+<p><a href="{% url 'blog:check_message' user.id %}">Check your messages</a></p>
+<p><a href="{% url 'blog:add_file' user.id %}">Add file</a></p>
+<p><a href="{% url 'blog:check_files' user.id %}">Check your file</a></p>
+</div>
+</body>
+</html>
